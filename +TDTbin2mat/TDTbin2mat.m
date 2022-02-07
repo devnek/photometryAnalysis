@@ -64,6 +64,9 @@ function data = TDTbin2mat(BLOCK_PATH, varargin)
 %
 
 % defaults
+
+import TDTbin2mat.*
+
 BITWISE  = '';
 CHANNEL  = 0;
 COMBINE  = {};
