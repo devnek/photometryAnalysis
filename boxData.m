@@ -10,7 +10,7 @@ classdef boxData < handle
         time_ranges
         dataPath
         baselineBox = box('signal',{'x405A','x465A','x560B'}, 'event',{'PC0_','PC2_','PC4_','PC6_'});
-        box = box(signal = {'x405C','x465C','x560D'}, event = {'PC1_','PC3_','PC5_','PC7_'});
+        box = box('signal',{'x405C','x465C','x560D'}, 'event',{'PC1_','PC3_','PC5_','PC7_'});
     end
 
     methods
