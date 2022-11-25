@@ -28,7 +28,7 @@ classdef box < handle
             
             obj.fig = figure;
             
-            startOffset = 20000;
+            startOffset = 10;
             
             fs1 = data.streams.(obj.signal{1}).fs;
             fs2 = data.streams.(obj.signal{2}).fs;
@@ -100,7 +100,7 @@ bls = polyfit(X1, Y1, 1);
 Y_fit = bls(1).*X + bls(2);
 % Delta F/F = (signal channel - Scaled control channel)/Scaled control channel
 % dF/F =( F(t) - F0)/F0, F0 should be steady state value in Y_fit
-dfByf = (Y - Y_fit(20000))/Y_fit(20000);
+dfByf = (Y - Y_fit(10))/Y_fit(10);
 end
 
 

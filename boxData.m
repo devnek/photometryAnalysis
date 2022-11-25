@@ -23,7 +23,9 @@ classdef boxData < handle
             %   Detailed explanation goes here
             data = TDTbin2mat.TDTbin2mat(obj.dataPath);
             obj.epocs       = data.epocs;
-            obj.streams     = data.streams;
+
+            obj.downstream(data.streams);
+
             obj.scalars     = data.scalars;
             obj.info        = data.info;
             obj.time_ranges = data.time_ranges;
@@ -57,6 +59,23 @@ classdef boxData < handle
                 end
             end
             tbl = table(Field,Value);
+        end
+
+
+        function downstream(obj,streams)
+            obj.streams = streams;
+            f = fields(streams);
+            f = setdiff(f,{'Fi2r','Fi1r'}); % delete Fi*r signals
+            for i = f'
+                Fs = streams.(i{:}).fs;
+                x = streams.(i{:}).data;
+                fs = 2;   % desired frequency
+                [P,Q] = rat(fs/Fs);
+                abs(P/Q*Fs-fs);
+                xnew = single(resample(double(x),P,Q));
+                obj.streams.(i{:}).data = xnew;
+                obj.streams.(i{:}).fs = fs;
+            end
         end
 
         %{
